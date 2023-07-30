@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class CalculatorScreen extends StatefulWidget {
@@ -13,7 +12,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
   void _onDigitPress(String digit) {
     setState(() {
-      if (_displayValue == '0' || _displayValue == 'Infinity' || _displayValue == '-Infinity') {
+      if (_displayValue == '0' ||
+          _displayValue == 'Infinity' ||
+          _displayValue == '-Infinity') {
         _displayValue = digit;
       } else {
         _displayValue += digit;
@@ -162,6 +163,3 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     );
   }
 }
-
-
-
