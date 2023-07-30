@@ -7,6 +7,7 @@ class ToDoScreen extends StatefulWidget {
   State<ToDoScreen> createState() => _ToDoScreenState();
 }
 
+
 class _ToDoScreenState extends State<ToDoScreen> {
   List<String> tasks = [];
   final TextEditingController addTaskController = TextEditingController();
@@ -52,16 +53,19 @@ class _ToDoScreenState extends State<ToDoScreen> {
     );
   }
 
-  void _editTask(int index) {
+  void _editTask(int index, String currentTaskName) {
+    // Create a TextEditingController and set the current task name as its initial value
+    TextEditingController taskController = TextEditingController(text: currentTaskName);
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Edit a task to your list'),
+        title: const Text('Edit a task in your list'),
         content: TextField(
           onChanged: (value) {
             // You can perform additional validation here if needed.
           },
-          controller: addTaskController,
+          controller: taskController,
         ),
         actions: [
           TextButton(
@@ -73,7 +77,7 @@ class _ToDoScreenState extends State<ToDoScreen> {
           TextButton(
             onPressed: () {
               setState(() {
-                tasks[index] = addTaskController.text; // Replace 'Updated Task' with the edited task.
+                tasks[index] = taskController.text; // Update the task name with the edited value.
               });
               Navigator.pop(context);
             },
@@ -106,7 +110,7 @@ class _ToDoScreenState extends State<ToDoScreen> {
               children: [
                 IconButton(
                   icon: const Icon(Icons.edit),
-                  onPressed: () => _editTask(index),
+                  onPressed: () => _editTask(index,tasks[index]),
                 ),
                 IconButton(
                   icon: const Icon(Icons.delete),
